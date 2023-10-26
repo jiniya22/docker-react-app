@@ -1,0 +1,11 @@
+sudo: required
+language: generic
+services:
+  - docker
+before_insall:
+  - echo "start Creating an image with dockerfile"
+  - docker build -t jiniworld/docker-react-app -f Dockerfile.dev .
+script:
+  - docker run -e CI=true jiniworld/docker-react-app npm run test -- --coverage
+after_success:
+  - echo "Test Success!"
